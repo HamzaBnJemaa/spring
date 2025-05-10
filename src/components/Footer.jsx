@@ -1,73 +1,76 @@
+"use client"
+
+import { useState } from "react"
+
 const Footer = () => {
+  const [expandedSection, setExpandedSection] = useState(null)
+
+  const toggleSection = (index) => {
+    if (expandedSection === index) {
+      setExpandedSection(null)
+    } else {
+      setExpandedSection(index)
+    }
+  }
+
+  const footerSections = [
+    {
+      title: "Product",
+      links: [
+        { name: "Features", url: "#" },
+        { name: "Why Cequence", url: "#" },
+        { name: "Technology", url: "#" },
+        { name: "Security", url: "#" },
+        { name: "Pricing", url: "#" },
+      ],
+    },
+    {
+      title: "Solution",
+      links: [
+        { name: "Procurement", url: "#" },
+        { name: "Sales", url: "#" },
+        { name: "Legal", url: "#" },
+        { name: "Medium Businesses", url: "#" },
+        { name: "Enterprises", url: "#" },
+      ],
+    },
+    {
+      title: "Company",
+      links: [
+        { name: "Careers", url: "#" },
+        { name: "Case study", url: "#" },
+      ],
+    },
+    {
+      title: "Links",
+      links: [
+        { name: "Facebook", url: "#" },
+        { name: "LinkedIn", url: "#" },
+      ],
+    },
+  ]
+
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer-content">
-          <div className="footer-column">
-            <h3>Product</h3>
-            <ul>
-              <li>
-                <a href="#">Features</a>
-              </li>
-              <li>
-                <a href="#">Why Cequence</a>
-              </li>
-              <li>
-                <a href="#">Technology</a>
-              </li>
-              <li>
-                <a href="#">Security</a>
-              </li>
-              <li>
-                <a href="#">Pricing</a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="footer-column">
-            <h3>Solution</h3>
-            <ul>
-              <li>
-                <a href="#">Procurement</a>
-              </li>
-              <li>
-                <a href="#">Sales</a>
-              </li>
-              <li>
-                <a href="#">Legal</a>
-              </li>
-              <li>
-                <a href="#">Medium Businesses</a>
-              </li>
-              <li>
-                <a href="#">Enterprises</a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="footer-column">
-            <h3>Company</h3>
-            <ul>
-              <li>
-                <a href="#">Careers</a>
-              </li>
-              <li>
-                <a href="#">Case study</a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="footer-column">
-            <h3>Links</h3>
-            <ul>
-              <li>
-                <a href="#">Facebook</a>
-              </li>
-              <li>
-                <a href="#">LinkedIn</a>
-              </li>
-            </ul>
-          </div>
+          {footerSections.map((section, index) => (
+            <div key={section.title} className="footer-column">
+              <div className="footer-heading" onClick={() => toggleSection(index)}>
+                <h3>{section.title}</h3>
+                <span className={`footer-toggle ${expandedSection === index ? "active" : ""}`}>
+                  {expandedSection === index ? "−" : "+"}
+                </span>
+              </div>
+              <ul className={`footer-links ${expandedSection === index ? "expanded" : ""}`}>
+                {section.links.map((link) => (
+                  <li key={link.name}>
+                    <a href={link.url}>{link.name}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
         <div className="footer-bottom">

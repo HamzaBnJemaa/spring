@@ -1,9 +1,22 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  // Prevent scrolling when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "auto"
+    }
+
+    return () => {
+      document.body.style.overflow = "auto"
+    }
+  }, [isMenuOpen])
 
   return (
     <nav className="navbar">
@@ -13,28 +26,42 @@ const Navbar = () => {
           <div className={`menu-items ${isMenuOpen ? "active" : ""}`}>
             <ul>
               <li>
-                <a href="#home">Home</a>
+                <a href="#home" onClick={() => setIsMenuOpen(false)}>
+                  Home
+                </a>
               </li>
               <li>
-                <a href="#contact">Contact</a>
+                <a href="#contact" onClick={() => setIsMenuOpen(false)}>
+                  Contact
+                </a>
               </li>
               <li>
-                <a href="#blog">Blog</a>
+                <a href="#blog" onClick={() => setIsMenuOpen(false)}>
+                  Blog
+                </a>
               </li>
               <li>
-                <a href="#support">Support</a>
+                <a href="#support" onClick={() => setIsMenuOpen(false)}>
+                  Support
+                </a>
               </li>
               <li>
-                <a href="#about">About</a>
+                <a href="#about" onClick={() => setIsMenuOpen(false)}>
+                  About
+                </a>
               </li>
             </ul>
             <button className="get-started-btn">Get Start →</button>
           </div>
-          <div className="mobile-menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <div
+            className={`mobile-menu-toggle ${isMenuOpen ? "active" : ""}`}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
             <span></span>
             <span></span>
             <span></span>
           </div>
+          {isMenuOpen && <div className="menu-overlay" onClick={() => setIsMenuOpen(false)}></div>}
         </div>
       </div>
     </nav>
