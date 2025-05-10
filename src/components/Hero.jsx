@@ -4,8 +4,10 @@ const Hero = () => {
       <div className="container">
         <div className="hero-content">
           <div className="hero-text">
-            <h1>We Build Experiences For Your Clients</h1>
-            <p>
+<h1>
+  We Build<br /> Experiences<br />
+  For Your Clients
+</h1>            <p>
               Revolver Template is a professional webflow template with multiple sections that you can fully customize
             </p>
             <div className="contact-form">
